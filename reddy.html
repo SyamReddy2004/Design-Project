@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grader | Coconut & Turmeric</title>
+    <link rel="stylesheet" href="./backend/static/css/style.css">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">NaturaGrade AI</div>
+        <p class="tagline">Premium Quality Assessment for Agriculture</p>
+    </header>
+
+    <main>
+        <!-- Toggle -->
+        <div class="mode-switch">
+            <button class="mode-btn active coconut" onclick="switchMode('coconut')">Tender Coconut</button>
+            <button class="mode-btn" onclick="switchMode('turmeric')">Turmeric</button>
+        </div>
+
+        <!-- Upload Card -->
+        <div class="glass-card">
+            <div class="upload-zone" id="dropZone">
+                <input type="file" id="fileInput" accept="image/*">
+                <div class="upload-content">
+                    <div class="upload-icon">
+                        <ion-icon name="cloud-upload-outline"></ion-icon>
+                    </div>
+                    <div class="upload-text">
+                        <h3>Drag & Drop or Click to Upload</h3>
+                        <p>Support for JPG, PNG (Max 5MB)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="camera-actions">
+                <button class="camera-btn" onclick="toggleCamera(true)">
+                    <ion-icon name="camera-outline"></ion-icon> Live Camera
+                </button>
+            </div>
+
+            <div class="camera-view" id="cameraView" style="display: none;">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <div class="camera-controls">
+                    <button class="capture-btn" onclick="capturePhoto()"><ion-icon
+                            name="radio-button-on"></ion-icon></button>
+                    <button class="close-camera-btn" onclick="toggleCamera(false)"><ion-icon
+                            name="close"></ion-icon></button>
+                </div>
+            </div>
+            <!-- Preview -->
+            <div class="preview-container" id="previewContainer">
+                <img src="" alt="Preview" class="preview-image" id="previewImage">
+                <br>
+                <div id="loader" class="loader" style="display: none;"></div>
+                <button class="analyze-btn" id="analyzeBtn" onclick="analyzeImage()">
+                    Analyze Quality
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Card -->
+        <div class="glass-card result-card" id="resultCard">
+            <div class="result-header">
+                <div>
+                    <div class="grade-label">Quality Grade</div>
+                    <div class="grade-badge" id="gradeValue">A</div>
+                </div>
+                <div style="text-align: right; width: 200px;">
+                    <div class="grade-label">AI Confidence</div>
+                    <div class="confidence-container">
+                        <div class="confidence-bar" id="confidenceBar"></div>
+                    </div>
+                    <div class="metric-value" id="confidenceValue"
+                        style="color: var(--primary); font-size: 1rem; margin-top: 5px;">98%</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid" id="metricsGrid">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="analysis-summary" id="analysisSummary">
+                <h3><ion-icon name="analytics-outline"></ion-icon> Clear Analysis</h3>
+                <ul id="analysisList">
+                    <!-- Populated by JS -->
+                </ul>
+
+                <div class="footer-analysis">
+                    <div class="advice-box">
+                        <h4><ion-icon name="leaf-outline"></ion-icon> Storage Advice</h4>
+                        <p id="storageAdvice"></p>
+                    </div>
+                    <div class="market-box">
+                        <h4><ion-icon name="cart-outline"></ion-icon> Market Advice</h4>
+                        <p id="marketAdvice"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="./backend/static/js/app.js"></script>
+</body>
+
+</html>
